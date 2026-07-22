@@ -1,0 +1,26 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+
+    Node(int data)
+    {
+        this.data = data;
+        this.next = null;
+    }
+}
+*/
+class Solution {
+    Node deleteNode(Node head, int idx) {
+        if(head==null) return null;
+        else if(idx==1) return head.next;
+        Node temp = head;
+        for(int i=1;i<idx-1;i++){
+            temp =temp.next;
+        }
+        if(temp==null||temp.next==null) return head;
+        temp.next = temp.next.next;
+        return head;
+    }
+}

@@ -1,0 +1,44 @@
+/* Structure of Linked List Node
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+*/
+
+// class Solution {
+//     Node reverseList(Node head) {
+//         Node temp = head;
+//         ArrayList<Node> ans = new ArrayList<>();
+//         while(temp != null){
+//             ans.add(temp);
+//             temp =temp.next;
+//         }
+//         int n = ans.size();
+//         for(int i=n-1;i>=1;i--){
+//             ans.get(i).next = ans.get(i-1);
+//         }
+//         ans.get(0).next=null;
+//         return ans.get(n-1);
+//     }
+// }
+
+
+class Solution {
+    Node reverseList(Node head) {
+        Node prev = null;
+        Node frwd=null;
+        Node curr = head;
+        while(curr!=null){
+            frwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = frwd;
+        }
+        return prev;
+    }
+}

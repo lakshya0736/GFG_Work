@@ -1,0 +1,51 @@
+/* Node Structure
+class Node {
+    int data;
+    Node next;
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+} */
+
+class Solution {
+    public Node reverse(Node head){
+        Node prev = null;
+        Node frwd = null;
+        Node curr = head;
+        while(curr!=null){
+            frwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = frwd;
+        }
+        return prev;
+    }
+    public void reorderList(Node head) {
+        Node slow = head;
+        Node fast = head;
+        while(fast.next!=null&&fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node head2 = slow.next;
+        slow.next = null;
+        head2 = reverse(head2);
+        
+        Node d1 = new Node(-1);
+        Node t1 = d1;
+        Node a = head;
+        Node b = head2;
+        while(a!=null&&b!=null){
+            t1.next = a;
+            t1 = t1.next;
+            a = a.next;
+            t1.next = b;
+            t1 = t1.next;
+            b = b.next;
+        }
+        if(a!=null) t1.next =a;
+        if(b!=null) t1.next =b;
+        return;
+    }
+}

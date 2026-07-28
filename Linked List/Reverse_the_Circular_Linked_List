@@ -1,0 +1,32 @@
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+*/
+class Solution {
+    public Node reverseCircular(Node head) {
+        // code here
+        Node temp = head;
+        while(temp.next!=head){
+            temp = temp.next;
+        }
+        temp.next = null;
+        Node prev = null;
+        Node frwd = null;
+        Node curr = head;
+        while(curr!=null){
+            frwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = frwd;
+        }
+        head.next = prev;
+        return prev;
+    }
+}

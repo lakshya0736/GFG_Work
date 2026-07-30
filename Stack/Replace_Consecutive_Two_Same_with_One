@@ -1,0 +1,44 @@
+class Solution {
+    public String removeDuplicates(String s) {
+         Stack<Character> st = new Stack<>();
+         StringBuilder ans = new StringBuilder();
+         int n = s.length();
+         for(int i=0;i<n;i++){
+             char ch = s.charAt(i);
+             if(st.size()==0) st.push(ch);
+             else if(st.peek()!=ch) st.push(ch);
+         }
+         st = reverse(st);
+         while(st.size()>0){
+             ans.append(st.pop());
+         }
+         return ans.toString();
+         
+    }
+    public Stack<Character> reverse(Stack<Character> st){
+        Stack<Character> st2 = new Stack<>();
+        while(st.size()>0){
+            st2.push(st.pop());
+        }
+        return st2;
+    }
+}
+
+
+
+// class Solution {
+//     public String removeDuplicates(String s) {
+//         int n = s.length();
+//         String ans ="";
+//         int i=0, j=0;
+//         while(j<n){
+//             if(s.charAt(i)==s.charAt(j)) j++;
+//             else{
+//                 ans+=s.charAt(i);
+//                 i=j;
+//             }
+//         }
+//         ans+=s.charAt(i);
+//         return ans;
+//     }
+// }

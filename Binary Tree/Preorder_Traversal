@@ -1,0 +1,25 @@
+/* Structure of Tree Node
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}*/
+
+class Solution {
+    public static void dfspreorder(Node root, ArrayList<Integer> ans){
+        if(root==null) return;
+        ans.add(root.data);
+        dfspreorder(root.left,ans);
+        dfspreorder(root.right,ans);
+    }
+    public ArrayList<Integer> preOrder(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        dfspreorder(root, ans);
+        return ans;
+    }
+}

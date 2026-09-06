@@ -1,0 +1,20 @@
+class Solution {
+    private static void levelOrderLine(Node root, ArrayList<Integer> ans){
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            while(q.size()>0){
+                Node front = q.remove();
+                ans.add(front.data);
+                if(front.left!=null) q.add(front.left);
+                if(front.right!=null) q.add(front.right);
+                
+            }
+    }
+    
+    public ArrayList<Integer> levelOrder(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        levelOrderLine(root, ans);
+        return ans;
+        
+    }
+}

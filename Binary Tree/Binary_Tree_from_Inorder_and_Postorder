@@ -1,0 +1,34 @@
+/* Structure of binary tree node
+class Node {
+    int data;
+    Node left, right;
+    Node(int x) {
+        data = x;
+        left = right = null;
+    }
+} */
+
+class Solution {
+    public Node buildTree(int[] inorder, int[] postorder) {
+        int n =  inorder.length;
+        return build(0,n-1,0,n-1,inorder,postorder);
+
+    }
+    public static Node build(int postlo, int posthi, int inlo, int inhi, int[] inorder, int[] postorder){
+            if(postlo>posthi || inlo>inhi) return null;
+            int val = postorder[posthi];
+            Node root = new Node(val);
+            int r=0;
+            for(int i=inlo;i<=inhi;i++){
+                if(inorder[i] == val){
+                     r= i;
+                     break;
+                } 
+            }
+            int count =  r-inlo;
+            root.left = build(postlo,postlo+count-1,inlo,r-1,inorder,postorder);
+            root.right = build(postlo+count,posthi-1,r+1,inhi,inorder,postorder);
+            return root;
+        
+    }
+}

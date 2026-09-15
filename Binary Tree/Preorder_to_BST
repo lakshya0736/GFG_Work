@@ -1,0 +1,37 @@
+/*
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int val) {
+        data = val;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    public Node preToBST(int preorder[]) {
+        int[] inorder = Arrays.copyOf(preorder,preorder.length);
+        Arrays.sort(inorder);
+        int n =  inorder.length;
+        return build(0,n-1,0,n-1,inorder,preorder);
+
+    }
+    public static Node build(int prelo, int prehi, int inlo, int inhi, int[] inorder, int[] preorder){
+        if(prelo>prehi || inlo>inhi) return null;
+        int val = preorder[prelo];
+        Node root = new Node(val);
+        int r=0;
+        for(int i=inlo;i<=inhi;i++){
+            if(inorder[i] == val){
+                    r= i;
+                    break;
+            } 
+        }
+        int count =  r-inlo;
+        root.left = build(prelo+1,prelo+count,inlo,r-1,inorder,preorder);
+        root.right = build(prelo+count+1,prehi,r+1,inhi,inorder,preorder);
+        return root;
+    }
+}

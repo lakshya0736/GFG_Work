@@ -1,0 +1,34 @@
+/*
+Definition for Node
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int val) {
+        data = val;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    public boolean search(Node root, int target) {
+        while(root!=null){
+            if(root.data>target) root = root.left;
+            else if(root.data<target) root = root.right;
+            else if(root.data==target) return true;
+        }
+        return false;
+        
+    }
+}
+
+// class Solution {
+//     public boolean search(Node root, int target) {
+//         if(root==null) return false;
+//         if(root.data==target) return true;
+//         else if(root.data>target) return search(root.left,target);
+//         else return search(root.right,target);
+//     }
+// }

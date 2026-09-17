@@ -1,0 +1,9 @@
+class Solution {
+    int getCount(Node root, int low, int high) {
+        if(root==null) return 0;
+        if(root.data>high) return getCount(root.left,low,high);
+        else if(root.data<low) return getCount(root.right,low,high);
+        return 1 + getCount(root.left,low,high) + getCount(root.right,low,high);
+        
+    }
+}

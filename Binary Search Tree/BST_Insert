@@ -1,0 +1,21 @@
+class Solution {
+    public Node insert(Node root, int key) {
+        attach(root,key);
+        return root;
+    }
+    public static void attach(Node root, int key){
+        if(root==null) return;
+        if(root.data==key) return;
+        if(root.data<key){
+            if(root.right==null){
+                Node t = new Node(key);
+                root.right = t;
+            }else attach(root.right,key);
+        }else if(root.data>key){
+            if(root.left==null){
+                Node t = new Node(key);
+                root.left = t;
+            }else attach(root.left, key);
+        }
+    }
+}

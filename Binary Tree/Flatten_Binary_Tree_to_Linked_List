@@ -1,15 +1,3 @@
-/* Binary Tree Node Structure
-class Node{
-    int data;
-    Node left;
-    Node right;
-    Node(int data){
-        this.data = data;
-        left = null;
-        right = null;
-    }
-}
-*/
 // class Solution {
 //     public static void flatten(Node root) {
 //         ArrayList<Node> arr = new ArrayList<>();
@@ -33,18 +21,34 @@ class Node{
 //     }
 // }
 
+// class Solution {
+//     public static void flatten(Node root) {
+//         if(root==null) return;
+//         Node lst = root.left;
+//         Node rst = root.right;
+//         root.right= null;
+//         root.left = null;
+//         flatten(lst);
+//         flatten(rst);
+//         root.right = lst;
+//         Node last = root;
+//         while(last.right!=null) last = last.right;
+//         last.right = rst;
+//     }
+// }
+
 class Solution {
     public static void flatten(Node root) {
-        if(root==null) return;
-        Node lst = root.left;
-        Node rst = root.right;
-        root.right= null;
-        root.left = null;
-        flatten(lst);
-        flatten(rst);
-        root.right = lst;
-        Node last = root;
-        while(last.right!=null) last = last.right;
-        last.right = rst;
+        Node curr = root;
+        while(curr!=null){
+            if(curr.left!=null){
+                Node pred = curr.left;
+                while(pred.right!=null) pred = pred.right;
+                pred.right = curr.right;
+                curr.right = curr.left;
+                curr.left = null;
+            }
+            else curr = curr.right;
+        }
     }
 }

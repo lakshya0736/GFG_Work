@@ -1,0 +1,49 @@
+class Triplet implements Comparable<Triplet>{
+    int val;
+    int row;
+    int col;
+    Triplet(int val, int row, int col){
+        this.val = val;
+        this.row = row;
+        this.col = col;
+    }
+    public int compareTo(Triplet t){
+        return this.val-t.val;
+    }
+}
+class Solution {
+    public ArrayList<Integer> findSmallestRange(int[][] mat) {
+        int n = mat.length;
+        PriorityQueue<Triplet> pq = new PriorityQueue<>();
+        int max = Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            pq.add(new Triplet(mat[i][0], i , 0));
+            max = Math.max(max,mat[i][0]);
+        }
+        int bestL = pq.peek().val;
+        int bestR = max;
+        int bestDiff = bestR - bestL;
+        while(true){
+            Triplet curr  = pq.poll();
+            int min = curr.val;
+            int currDiff = max - min;
+            if(currDiff<bestDiff || (currDiff == bestDiff && min<bestL)){
+                bestL = min;
+                bestR = max;
+                bestDiff = currDiff;
+            }
+            int nextCol = curr.col + 1;
+            if(nextCol==mat[curr.row].length){
+                break;
+            }
+            int nextVal = mat[curr.row][nextCol];
+            pq.add(new Triplet(nextVal, curr.row, nextCol));
+            max = Math.max(max, nextVal);
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(bestL);
+        ans.add(bestR);
+        return ans;
+        
+    }
+}

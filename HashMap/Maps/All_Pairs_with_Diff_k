@@ -1,0 +1,35 @@
+// class Solution {
+//     int countPairs(int[] arr, int k) {
+//         int n = arr.length;
+//         int count =0;
+//         for(int i=0;i<=n-1;i++){
+//             for(int j=i+1;j<n;j++){
+//                 if(Math.abs(arr[i]-arr[j]) == k) count++;
+//             }
+//         }
+//         return count;
+        
+//     }
+// }
+
+class Solution {
+    int countPairs(int[] arr, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for(int ele : arr){
+            if(map.containsKey(ele)){
+                int freq = map.get(ele);
+                map.put(ele,freq+1);
+            }else map.put(ele,1);
+        }
+        for(int x : map.keySet()){
+            int rem1 = x-k;
+            int rem2 = x+k;
+            if(map.containsKey(rem1)) count+= (map.get(x))*(map.get(rem1));
+            if(map.containsKey(rem2)) count+= (map.get(x))*(map.get(rem2));
+        }
+        count /= 2;
+        return count;
+        
+    }
+}

@@ -1,24 +1,47 @@
+
+// class Solution {
+//     public boolean isSubset(int a[], int b[]) {
+//             HashMap<Integer, Integer> amap = new HashMap<>();
+//             HashMap<Integer, Integer> bmap = new HashMap<>();
+//             for(int i=0;i<a.length;i++){
+//                 if(amap.containsKey(a[i])){
+//                     int freq = amap.get(a[i]);
+//                     amap.put(a[i],freq+1);
+//                 }else amap.put(a[i],1);
+//             }
+//             for(int ele:b){
+//                 if(!amap.containsKey(ele)) return false;
+//                 if(bmap.containsKey(ele)){
+//                     int freq = bmap.get(ele);
+//                     bmap.put(ele,freq+1);
+//                 }else bmap.put(ele,1);
+//             }
+//             for(int key : bmap.keySet()){
+//                 int bfreq = bmap.get(key);
+//                 int afreq = amap.get(key);
+//                 if(afreq<bfreq) return false;
+//             }
+//             return true;
+//         }
+// }
+
+
 class Solution {
     public boolean isSubset(int a[], int b[]) {
             HashMap<Integer, Integer> amap = new HashMap<>();
-            HashMap<Integer, Integer> bmap = new HashMap<>();
             for(int i=0;i<a.length;i++){
                 if(amap.containsKey(a[i])){
                     int freq = amap.get(a[i]);
                     amap.put(a[i],freq+1);
                 }else amap.put(a[i],1);
             }
-            for(int ele:b){
+            for(int ele : b){
                 if(!amap.containsKey(ele)) return false;
-                if(bmap.containsKey(ele)){
-                    int freq = bmap.get(ele);
-                    bmap.put(ele,freq+1);
-                }else bmap.put(ele,1);
-            }
-            for(int key : bmap.keySet()){
-                int bfreq = bmap.get(key);
-                int afreq = amap.get(key);
-                if(afreq<bfreq) return false;
+                if(amap.containsKey(ele)){
+                    int freq = amap.get(ele);
+                    amap.put(ele,freq-1);
+                    if(freq==0) return false;
+                }
             }
             return true;
         }

@@ -1,0 +1,29 @@
+class Solution {
+    public int countKdivPairs(int[] arr, int k) {
+            int pairs = 0;
+            HashMap<Integer,Integer> map = new HashMap<>();
+            for(int ele : arr) {
+                int rem = ele % k;
+                if (map.containsKey(rem)) {
+                    int freq = map.get(rem);
+                    map.put(rem, freq + 1);
+                } else map.put(rem, 1);
+            }
+            int zerocount = map.getOrDefault(0,0);
+            pairs += zerocount*(zerocount-1)/2;
+            map.remove(0);
+            if(k%2==0&&map.containsKey(k/2)){
+                int halfcount = map.get(k/2);
+                pairs += halfcount*(halfcount-1)/2;
+                map.remove(k/2);
+            }
+            pairs*=2;
+            for(int key:map.keySet()){
+                int x = k-key;
+                if(map.containsKey(x)){
+                    pairs+= (map.get(key))*(map.get(x));
+                }
+            }
+            return pairs/2;
+        }
+}

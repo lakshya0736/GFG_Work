@@ -1,0 +1,9 @@
+class Solution {
+    int replaceBit(int n, int k) {
+        int len = Integer.toBinaryString(n).length();
+        if(k>len) return n;
+        int pos= len-k;
+        return n& ~(1<<pos);
+        
+    }
+}

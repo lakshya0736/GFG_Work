@@ -1,0 +1,9 @@
+class Solution {
+    public int toggleBits(int n, int l, int r) {
+        int rangelen = r-l+1;
+        int mask = ((1<<rangelen)-1)<<l-1;
+        return n ^ mask;
+    }
+};
+
+

@@ -1,0 +1,15 @@
+// class Solution {
+//     public int setBit(int n) {
+//         for(int i=0;i<=30;i++){
+//             int mask = 1<<i;
+//             if((n&mask)==0) return n|mask;
+//         }
+//         return n;
+//     }
+// }
+
+class Solution {
+    public int setBit(int n) {
+        return n|n+1;
+    }
+}

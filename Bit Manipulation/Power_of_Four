@@ -1,0 +1,8 @@
+class Solution {
+    boolean isPowerOfFour(int n) {
+        int power = 1;
+        while(power<n) power = power<<2;
+        return power == n;
+        
+    }
+}

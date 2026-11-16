@@ -1,0 +1,35 @@
+class Solution {
+    public int knapsack(int capacity, int val[], int wt[]) {
+            int[][] dp = new int[val.length][capacity+1];
+            for(int[] row:dp){
+                Arrays.fill(row,-1);
+            }
+            return helper(0,capacity, val, wt, dp);
+        }
+        static int helper(int i, int capacity, int[] val, int[] wt, int[][] dp){
+            if(i== val.length) return 0;
+            if(dp[i][capacity]!=-1) return dp[i][capacity];
+            int pick=0;
+            if(wt[i]<=capacity){
+                pick = val[i]+helper(i+1,capacity-wt[i], val, wt, dp);
+            }
+            int skip = helper(i+1,capacity, val, wt, dp);
+            return dp[i][capacity] = Math.max(pick,skip);
+        }
+}
+
+
+
+
+// class Solution {
+//     public int knapsack(int capacity, int val[], int wt[]) {
+//             return helper(0,capacity,val,wt);
+//         }
+//         static int helper(int i,int capacity, int[] val, int[] wt){
+//             if(capacity<0) return Integer.MIN_VALUE;
+//             if(i==val.length) return 0;
+//             int pick = val[i] + helper(i+1,capacity-wt[i],val,wt);
+//             int skip = helper(i+1,capacity,val,wt);
+//             return Math.max(pick,skip);
+//     }
+// }
